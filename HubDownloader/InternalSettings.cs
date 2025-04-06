@@ -12,8 +12,6 @@ namespace HubDownloader
 
         public static string HubAddressFormat = "https://www.pornhub.com/view_video.php?viewkey={0}";
 
-        public static string Debug_LogFile = "debug.log.txt";
-
         public static string JsonMetadata_SearchToken = "var flashvars_";
         public static string JsonMetadata_XPath = "//*[@id=\"player\"]/script[1]";
 

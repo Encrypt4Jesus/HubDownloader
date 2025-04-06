@@ -28,7 +28,6 @@ namespace HubDownloader
             }
         }
         private static WebDriverService _webdriverInstance = null;
-        public static ExtractionWorkflowResult LastErrorReason = ExtractionWorkflowResult.Success;
 
         public static bool IsProcessing
         {
@@ -68,6 +67,8 @@ namespace HubDownloader
                     _webdriverInstance.Shutdown();
                 }
                 _webdriverInstance = null;
+
+                LoggingBuffer.Dispose();
             }
         }
 
@@ -85,6 +86,7 @@ namespace HubDownloader
         }
 
         private static bool IsFirstRun = true;
+        private static ThreadLocal<StringBuilder> LoggingBuffer = new ThreadLocal<StringBuilder>(() => new StringBuilder());
 
         public static UrlExtractionResultObject ExtractUrlFromViewKey(string viewkey, RequestedVideoQuality requestedQuality, FallBackVideoQuality fallBackVideoQuality)
         {
@@ -97,6 +99,8 @@ namespace HubDownloader
 
             string resultUrl = null;
             string resultName = null;
+            LoggingBuffer.Value.Clear();
+            UrlExtractionResultObject result = new UrlExtractionResultObject();
             try
             {
                 SetIsProcessing(true);
@@ -105,20 +109,25 @@ namespace HubDownloader
 
                 if (IsShutdown)
                 {
-                    return null;
+                    result.ErrorReason = ExtractionWorkflowResult.WebdriverDisposed;
+                    result.DebugInformation = LoggingBuffer.Value;
+                    return result;
                 }
 
                 // Get JSON Metadata about the video
                 string scriptTag_InnerHtml = UrlExtractionHelperMethods.ExtractHtmlElementByXPath(Driver, requestUri, InternalSettings.JsonMetadata_XPath);
                 if (scriptTag_InnerHtml == null)
                 {
-                    LastErrorReason = ExtractionWorkflowResult.JsonMetadataNotFound;
-                    return null;
+                    result.ErrorReason = ExtractionWorkflowResult.JsonMetadataNotFound;
+                    result.DebugInformation = LoggingBuffer.Value;
+                    return result;
                 }
 
                 if (IsShutdown)
                 {
-                    return null;
+                    result.ErrorReason = ExtractionWorkflowResult.WebdriverDisposed;
+                    result.DebugInformation = LoggingBuffer.Value;
+                    return result;
                 }
                 string saveFileName = Driver.Title.Replace(" ", "_");
                 saveFileName = new string(saveFileName.Where(c => !Path.GetInvalidFileNameChars().Contains(c)).ToArray());
@@ -129,62 +138,68 @@ namespace HubDownloader
                 string json = UrlExtractionHelperMethods.ExtractJsonFromJavaScript(scriptTag_InnerHtml, InternalSettings.Json1_Extract_StartToken, InternalSettings.Json1_Extract_EndToken).Trim(';');
                 if (json == null)
                 {
-                    LastErrorReason = ExtractionWorkflowResult.JsonExtractionFailure;
-                    return null;
+                    result.ErrorReason = ExtractionWorkflowResult.JsonExtractionFailure;
+                    result.DebugInformation = LoggingBuffer.Value;
+                    return result;
                 }
 
-                Debug.Log.WriteLine("Extracted JSON from landing page:");
-                Debug.Log.WriteLine();
-                Debug.Log.WriteLine("<JSON>");
-                Debug.Log.WriteLine(json);
-                Debug.Log.WriteLine("</JSON>");
-                Debug.Log.WriteLine();
+                LoggingBuffer.Value.AppendLine("Extracted JSON from landing page:");
+                LoggingBuffer.Value.AppendLine();
+                LoggingBuffer.Value.AppendLine("<JSON>");
+                LoggingBuffer.Value.AppendLine(json);
+                LoggingBuffer.Value.AppendLine("</JSON>");
+                LoggingBuffer.Value.AppendLine();
 
                 // Parse JSON, extract media URLs
                 Dictionary<string, string> Video_QualityKey_UrlValue_Dictionary = UrlExtractionHelperMethods.ExtractMediaUrlsFromJson(json);
-                if(Video_QualityKey_UrlValue_Dictionary==null)
+                if (Video_QualityKey_UrlValue_Dictionary == null)
                 {
-                    LastErrorReason = ExtractionWorkflowResult.JsonExtractionFailure;
-                    return null;
+                    result.ErrorReason = ExtractionWorkflowResult.JsonExtractionFailure;
+                    result.DebugInformation = LoggingBuffer.Value;
+                    return result;
                 }
 
-                Debug.Log.WriteLine();
-                Debug.Log.WriteLine("Extracted Media URLs:");
-                Debug.Log.WriteLine(string.Join(Environment.NewLine, Video_QualityKey_UrlValue_Dictionary.Select(kvp => kvp.Value)));
-                Debug.Log.WriteLine();
+                LoggingBuffer.Value.AppendLine();
+                LoggingBuffer.Value.AppendLine("Extracted Media URLs:");
+                LoggingBuffer.Value.AppendLine(string.Join(Environment.NewLine, Video_QualityKey_UrlValue_Dictionary.Select(kvp => kvp.Value)));
+                LoggingBuffer.Value.AppendLine();
 
                 string nextResource = Video_QualityKey_UrlValue_Dictionary[InternalSettings.MediaAddressDictionary_Key]; // The URL with the key = "[]" is for the .mp4 resource
 
-                Debug.Log.WriteLine("Selected Resource URL:");
-                Debug.Log.WriteLine(nextResource);
-                Debug.Log.WriteLine();
+                LoggingBuffer.Value.AppendLine("Selected Resource URL:");
+                LoggingBuffer.Value.AppendLine(nextResource);
+                LoggingBuffer.Value.AppendLine();
 
                 if (IsShutdown)
                 {
-                    return null;
+                    result.ErrorReason = ExtractionWorkflowResult.WebdriverDisposed;
+                    result.DebugInformation = LoggingBuffer.Value;
+                    return result;
                 }
                 // Get the JSON 
                 string videoJson = UrlExtractionHelperMethods.GetHtmlPageSource(Driver, nextResource);
                 if (videoJson == null)
                 {
-                    LastErrorReason = ExtractionWorkflowResult.JsonMetadataNotFound;
-                    return null;
+                    result.ErrorReason = ExtractionWorkflowResult.JsonMetadataNotFound;
+                    result.DebugInformation = LoggingBuffer.Value;
+                    return result;
                 }
 
-                Debug.Log.WriteLine("2nd JSON (raw):");
-                Debug.Log.WriteLine(videoJson);
-                Debug.Log.WriteLine();
+                LoggingBuffer.Value.AppendLine("2nd JSON (raw):");
+                LoggingBuffer.Value.AppendLine(videoJson);
+                LoggingBuffer.Value.AppendLine();
 
                 string json2 = UrlExtractionHelperMethods.ExtractJsonFromJavaScript(videoJson, InternalSettings.Json2_Extract_StartToken, InternalSettings.Json2_Extract_EndToken) + "]";
                 if (json2 == null)
                 {
-                    LastErrorReason = ExtractionWorkflowResult.JsonExtractionFailure;
-                    return null;
+                    result.ErrorReason = ExtractionWorkflowResult.JsonExtractionFailure;
+                    result.DebugInformation = LoggingBuffer.Value;
+                    return result;
                 }
 
-                Debug.Log.WriteLine("2nd JSON (extracted):");
-                Debug.Log.WriteLine(json2);
-                Debug.Log.WriteLine();
+                LoggingBuffer.Value.AppendLine("2nd JSON (extracted):");
+                LoggingBuffer.Value.AppendLine(json2);
+                LoggingBuffer.Value.AppendLine();
 
                 Dictionary<string, string> VideoQualityKey_UrlValue_Dictionary = new Dictionary<string, string>();
 
@@ -216,22 +231,24 @@ namespace HubDownloader
                 resultUrl = VideoQualityKey_UrlValue_Dictionary[key];
                 resultUrl = resultUrl.Replace("&amp;", "&");
 
-                Debug.Log.WriteLine("Download:");
-                Debug.Log.WriteLine(resultName);
-                Debug.Log.WriteLine("@");
-                Debug.Log.WriteLine(resultUrl);
-                Debug.Log.WriteLine();
+                LoggingBuffer.Value.AppendLine("Download:");
+                LoggingBuffer.Value.AppendLine(resultName);
+                LoggingBuffer.Value.AppendLine("@");
+                LoggingBuffer.Value.AppendLine(resultUrl);
+                LoggingBuffer.Value.AppendLine();
             }
             catch
             {
-                return null;
+                result.ErrorReason = ExtractionWorkflowResult.Unknown;
+                result.DebugInformation = LoggingBuffer.Value;
+                return result;
             }
             finally
             {
                 SetIsProcessing(false);
             }
 
-            var result = new UrlExtractionResultObject(resultName, resultUrl);
+            result = new UrlExtractionResultObject(resultName, resultUrl);
             RaiseNewResultsAvailable(result);
             return result;
         }

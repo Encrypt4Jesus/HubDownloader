@@ -9,7 +9,7 @@ namespace HubDownloader
 {
     public enum ExtractionWorkflowResult
     {
-        Success,
+        None,
         NoInternet,
         JsonMetadataNotFound,
         JsonExtractionFailure,
@@ -17,7 +17,9 @@ namespace HubDownloader
         QualityNotAvailable,
         Http404,
         Captcha,
-        ServerOverloaded
+        ServerOverloaded,
+        WebdriverDisposed,
+        Unknown
     }
 
     public enum RequestedVideoQuality

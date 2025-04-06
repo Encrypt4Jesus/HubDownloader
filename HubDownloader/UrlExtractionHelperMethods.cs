@@ -12,6 +12,57 @@ namespace HubDownloader
 {
     public static class UrlExtractionHelperMethods
     {
+        public static string ViewKeyAllowedCharacters = "0123456789abcdefhp";
+
+        public static string IsolateViewkey(string input)
+        {
+            // https://www.pornhub.com/view_video.php?viewkey=ph69c693d69e695
+            // Why do we do it this way? In case they enter part of the url, like view_video.php?viewkey=ph69c693d69e695
+            string result = input.Replace("https://", "");
+            result = result.Replace("http://", "");
+            result = result.Replace("www.", "");
+            result = result.Replace("pornhub.com", "");
+            result = result.Replace("/", "");
+            result = result.Replace("view_video.php", "");
+            result = result.Replace("?", "");
+            result = result.Replace("viewkey", "");
+            result = result.Replace("=", "");
+            return result;
+        }
+
+        public static bool LooksLikeUrlOrViewkey(string input)
+        {
+            // https://www.pornhub.com/view_video.php?viewkey={viewkey}
+            // or viewkey
+            if (string.IsNullOrEmpty(input))
+            {
+                return false;
+            }
+            string sanitized = IsolateViewkey(input); // Just strip it out, dont even bother matching
+
+            return LooksLikeViewkey(sanitized);
+        }
+
+        public static bool LooksLikeViewkey(string input)
+        {
+            // 13 characters long
+            // contains only 0123456789abcdef
+            if (string.IsNullOrEmpty(input))
+            {
+                return false;
+            }
+            if (input.Length != 13 && input.Length != 15)
+            {
+                return false;
+            }
+            string lower = input.ToLower();
+            if (!lower.All(c => ViewKeyAllowedCharacters.Contains(c)))
+            {
+                return false;
+            }
+            return true;
+        }
+
         public static string ExtractHtmlElementByXPath(IWebDriver driver, string resourceUrl, string xpath)
         {
             try
@@ -56,7 +107,6 @@ namespace HubDownloader
                 return null;
             }
         }
-
 
         public static Dictionary<string, string> ExtractMediaUrlsFromJson(string json)
         {

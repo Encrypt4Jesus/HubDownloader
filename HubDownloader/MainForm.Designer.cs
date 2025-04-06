@@ -64,9 +64,9 @@
             // tbInput_ViewKeys
             // 
             tbInput_ViewKeys.BorderStyle = BorderStyle.FixedSingle;
-            tbInput_ViewKeys.Location = new Point(37, 41);
+            tbInput_ViewKeys.Location = new Point(42, 43);
             tbInput_ViewKeys.Name = "tbInput_ViewKeys";
-            tbInput_ViewKeys.Size = new Size(223, 27);
+            tbInput_ViewKeys.Size = new Size(251, 29);
             tbInput_ViewKeys.TabIndex = 0;
             tbInput_ViewKeys.TextAlign = HorizontalAlignment.Center;
             tbInput_ViewKeys.TextChanged += tbInput_ViewKeys_TextChanged;
@@ -75,9 +75,9 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(8, 8);
+            label1.Location = new Point(9, 8);
             label1.Name = "label1";
-            label1.Size = new Size(238, 20);
+            label1.Size = new Size(250, 21);
             label1.TabIndex = 1;
             label1.Text = "1). Place the 'viewkey' into the box:";
             // 
@@ -89,9 +89,9 @@
             flpOutput_Links.BorderStyle = BorderStyle.FixedSingle;
             flpOutput_Links.ContextMenuStrip = contextMenuFLP;
             flpOutput_Links.Controls.Add(linkLabel1);
-            flpOutput_Links.Location = new Point(37, 36);
+            flpOutput_Links.Location = new Point(42, 38);
             flpOutput_Links.Name = "flpOutput_Links";
-            flpOutput_Links.Size = new Size(879, 137);
+            flpOutput_Links.Size = new Size(989, 144);
             flpOutput_Links.TabIndex = 2;
             // 
             // contextMenuFLP
@@ -99,12 +99,12 @@
             contextMenuFLP.ImageScalingSize = new Size(20, 20);
             contextMenuFLP.Items.AddRange(new ToolStripItem[] { clearToolStripMenuItem });
             contextMenuFLP.Name = "contextMenuFLP";
-            contextMenuFLP.Size = new Size(113, 28);
+            contextMenuFLP.Size = new Size(117, 30);
             // 
             // clearToolStripMenuItem
             // 
             clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            clearToolStripMenuItem.Size = new Size(112, 24);
+            clearToolStripMenuItem.Size = new Size(116, 26);
             clearToolStripMenuItem.Text = "Clear";
             clearToolStripMenuItem.Click += clearToolStripMenuItem_Click;
             // 
@@ -112,10 +112,10 @@
             // 
             linkLabel1.AutoSize = true;
             linkLabel1.ContextMenuStrip = linkContextMenu;
-            linkLabel1.Location = new Point(10, 10);
-            linkLabel1.Margin = new Padding(10);
+            linkLabel1.Location = new Point(11, 10);
+            linkLabel1.Margin = new Padding(11, 10, 11, 10);
             linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(76, 20);
+            linkLabel1.Size = new Size(81, 21);
             linkLabel1.TabIndex = 0;
             linkLabel1.TabStop = true;
             linkLabel1.Text = "linkLabel1";
@@ -126,12 +126,12 @@
             linkContextMenu.Items.AddRange(new ToolStripItem[] { toolStripMenuOpenLink, toolStripMenuCopyLink, removeToolStripMenuItem });
             linkContextMenu.Name = "linkContextMenu";
             linkContextMenu.ShowImageMargin = false;
-            linkContextMenu.Size = new Size(108, 76);
+            linkContextMenu.Size = new Size(113, 82);
             // 
             // toolStripMenuOpenLink
             // 
             toolStripMenuOpenLink.Name = "toolStripMenuOpenLink";
-            toolStripMenuOpenLink.Size = new Size(107, 24);
+            toolStripMenuOpenLink.Size = new Size(112, 26);
             toolStripMenuOpenLink.Text = "&Open...";
             toolStripMenuOpenLink.ToolTipText = "Open link with configured browser";
             toolStripMenuOpenLink.Click += toolStripMenuOpenLink_Click;
@@ -139,7 +139,7 @@
             // toolStripMenuCopyLink
             // 
             toolStripMenuCopyLink.Name = "toolStripMenuCopyLink";
-            toolStripMenuCopyLink.Size = new Size(107, 24);
+            toolStripMenuCopyLink.Size = new Size(112, 26);
             toolStripMenuCopyLink.Text = "&Copy";
             toolStripMenuCopyLink.ToolTipText = "Copy link address to the clipboard";
             toolStripMenuCopyLink.Click += toolStripMenuCopyLink_Click;
@@ -147,7 +147,7 @@
             // removeToolStripMenuItem
             // 
             removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-            removeToolStripMenuItem.Size = new Size(107, 24);
+            removeToolStripMenuItem.Size = new Size(112, 26);
             removeToolStripMenuItem.Text = "&Remove";
             removeToolStripMenuItem.Click += removeToolStripMenuItem_Click;
             // 
@@ -158,16 +158,16 @@
             label4.Location = new Point(3, 3);
             label4.Margin = new Padding(3);
             label4.Name = "label4";
-            label4.Size = new Size(619, 20);
+            label4.Size = new Size(645, 21);
             label4.TabIndex = 7;
             label4.Text = "NOTE: The viewkey is just the unique part of the URL., denoted in bold in the example below:";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(8, 4);
+            label5.Location = new Point(9, 4);
             label5.Name = "label5";
-            label5.Size = new Size(735, 20);
+            label5.Size = new Size(765, 21);
             label5.TabIndex = 8;
             label5.Text = "2). A click-able URL wil appear below:    (Since the browser downloads files much faster, we will leverage that)";
             // 
@@ -175,12 +175,12 @@
             // 
             richTextBox_Example.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             richTextBox_Example.BorderStyle = BorderStyle.None;
-            richTextBox_Example.Location = new Point(50, 36);
-            richTextBox_Example.Margin = new Padding(50, 10, 10, 10);
-            richTextBox_Example.MinimumSize = new Size(360, 20);
+            richTextBox_Example.Location = new Point(56, 37);
+            richTextBox_Example.Margin = new Padding(56, 10, 11, 10);
+            richTextBox_Example.MinimumSize = new Size(405, 21);
             richTextBox_Example.Name = "richTextBox_Example";
             richTextBox_Example.ReadOnly = true;
-            richTextBox_Example.Size = new Size(565, 20);
+            richTextBox_Example.Size = new Size(584, 21);
             richTextBox_Example.TabIndex = 9;
             richTextBox_Example.Text = "...hub.com/view_video.php?viewkey=THeViEwKey123";
             // 
@@ -190,17 +190,17 @@
             flowLayoutPanel1.Controls.Add(label4);
             flowLayoutPanel1.Controls.Add(richTextBox_Example);
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel1.Location = new Point(284, 47);
+            flowLayoutPanel1.Location = new Point(320, 49);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(649, 136);
+            flowLayoutPanel1.Size = new Size(730, 143);
             flowLayoutPanel1.TabIndex = 10;
             // 
             // btbSettings
             // 
             btbSettings.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btbSettings.Location = new Point(790, 6);
+            btbSettings.Location = new Point(889, 6);
             btbSettings.Name = "btbSettings";
-            btbSettings.Size = new Size(143, 35);
+            btbSettings.Size = new Size(161, 37);
             btbSettings.TabIndex = 11;
             btbSettings.Text = "Settings...";
             btbSettings.UseVisualStyleBackColor = true;
@@ -216,9 +216,9 @@
             panelBottom.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panelBottom.Controls.Add(label5);
             panelBottom.Controls.Add(flpOutput_Links);
-            panelBottom.Location = new Point(6, 209);
+            panelBottom.Location = new Point(7, 219);
             panelBottom.Name = "panelBottom";
-            panelBottom.Size = new Size(941, 189);
+            panelBottom.Size = new Size(1059, 198);
             panelBottom.TabIndex = 12;
             // 
             // panelTop
@@ -229,26 +229,26 @@
             panelTop.Controls.Add(btbSettings);
             panelTop.Controls.Add(tbInput_ViewKeys);
             panelTop.Controls.Add(label1);
-            panelTop.Location = new Point(6, 6);
+            panelTop.Location = new Point(7, 6);
             panelTop.Name = "panelTop";
-            panelTop.Size = new Size(941, 196);
+            panelTop.Size = new Size(1059, 206);
             panelTop.TabIndex = 13;
             // 
             // panelProcessing
             // 
             panelProcessing.Controls.Add(progressBarProcessing);
             panelProcessing.Controls.Add(labelProcessing);
-            panelProcessing.Location = new Point(8, 76);
+            panelProcessing.Location = new Point(9, 80);
             panelProcessing.Name = "panelProcessing";
-            panelProcessing.Size = new Size(270, 79);
+            panelProcessing.Size = new Size(304, 83);
             panelProcessing.TabIndex = 12;
             // 
             // progressBarProcessing
             // 
-            progressBarProcessing.Location = new Point(22, 36);
+            progressBarProcessing.Location = new Point(25, 38);
             progressBarProcessing.Minimum = 20;
             progressBarProcessing.Name = "progressBarProcessing";
-            progressBarProcessing.Size = new Size(236, 27);
+            progressBarProcessing.Size = new Size(266, 28);
             progressBarProcessing.Step = 30;
             progressBarProcessing.Style = ProgressBarStyle.Marquee;
             progressBarProcessing.TabIndex = 1;
@@ -258,9 +258,9 @@
             // 
             labelProcessing.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             labelProcessing.Font = new Font("Segoe UI Variable Text Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelProcessing.Location = new Point(18, 6);
+            labelProcessing.Location = new Point(20, 6);
             labelProcessing.Name = "labelProcessing";
-            labelProcessing.Size = new Size(251, 19);
+            labelProcessing.Size = new Size(282, 20);
             labelProcessing.TabIndex = 0;
             labelProcessing.Text = "Processing {0}...";
             labelProcessing.TextAlign = ContentAlignment.MiddleLeft;
@@ -276,12 +276,12 @@
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(950, 403);
+            ClientSize = new Size(1069, 423);
             Controls.Add(panelTop);
             Controls.Add(panelBottom);
-            MinimumSize = new Size(780, 450);
+            MinimumSize = new Size(875, 470);
             Name = "MainForm";
             Text = "Hub Downloader";
             flpOutput_Links.ResumeLayout(false);

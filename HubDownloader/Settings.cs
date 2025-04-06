@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using static System.Windows.Forms.LinkLabel;
 using static HubDownloader.BrowserInformation;
 
 namespace HubDownloader
@@ -27,12 +28,16 @@ namespace HubDownloader
                 }
                 CurrentlyLoadedSettings = loaded;
             }
-            else
+            else // Create a settings file with default settings
             {
                 Settings newSettings = new Settings()
                 {
+                    EnableDebugLogging = false,
+                    DebuggingLogFile = "debugging.log.txt",
                     PreferredBrowser = BrowserSelection.Edge,
                     OpenBrowserInPrivateMode = true,
+                    AutoScanClipboard = true,
+                    DiscreetLinkTitles = false,
                     PreferredVideoQuality = RequestedVideoQuality.ED_720,
                     FallbackVideoQuality = FallBackVideoQuality.Highest,
                     ChromeInstalledLocation = ExecutableLocation.GetChrome(),
@@ -54,6 +59,8 @@ namespace HubDownloader
             File.WriteAllText(SettingsFile, json);
         }
 
+        public bool EnableDebugLogging { get; set; }
+        public string DebuggingLogFile { get; set; }
 
         public string ChromeInstalledLocation { get; set; }
         public string EdgeInstalledLocation { get; set; }
@@ -62,6 +69,8 @@ namespace HubDownloader
         public BrowserSelection PreferredBrowser { get; set; }
 
         public bool OpenBrowserInPrivateMode { get; set; }
+        public bool AutoScanClipboard { get; set; }
+        public bool DiscreetLinkTitles { get; set; }
 
         public RequestedVideoQuality PreferredVideoQuality { get; set; }
 

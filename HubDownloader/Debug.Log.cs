@@ -9,8 +9,6 @@ namespace HubDownloader.Debug
 {
     public static class Log
     {
-        public static string LogFile = InternalSettings.Debug_LogFile;
-
         public static bool IsDebug()
         {
 #if DEBUG
@@ -20,6 +18,20 @@ namespace HubDownloader.Debug
 #endif
         }
 
+        private static bool IsLoggingEnabled()
+        {
+            if (Settings.CurrentlyLoadedSettings.EnableDebugLogging)
+            {
+                return true;
+            }
+
+            if (IsDebug())
+            {
+                return true;
+            }
+            return false;
+        }
+
         public static void WriteLine()
         {
             WriteLine(string.Empty);
@@ -27,17 +39,17 @@ namespace HubDownloader.Debug
 
         public static void WriteLine(string line)
         {
-            if (IsDebug())
+            if (IsLoggingEnabled())
             {
-                File.AppendAllText(LogFile, line + Environment.NewLine);
+                File.AppendAllText(Settings.CurrentlyLoadedSettings.DebuggingLogFile, line + Environment.NewLine);
             }
         }
 
         public static void Clear()
         {
-            if (IsDebug())
+            if (IsLoggingEnabled())
             {
-                File.WriteAllText(LogFile, string.Empty);
+                File.WriteAllText(Settings.CurrentlyLoadedSettings.DebuggingLogFile, string.Empty);
             }
         }
 

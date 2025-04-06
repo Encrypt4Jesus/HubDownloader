@@ -52,6 +52,8 @@ namespace HubDownloader
             tbFirefoxInstallationLocation.Text = SelectedSettings.FirefoxInstalledLocation;
 
             cbPrivateMode.Checked = SelectedSettings.OpenBrowserInPrivateMode;
+            cbDiscreetLinkTitles.Checked = SelectedSettings.DiscreetLinkTitles;
+            cbAutoScanClipboard.Checked = SelectedSettings.AutoScanClipboard;
 
             comboPreferredBrowser.DataSource = Enum.GetValues(typeof(BrowserSelection));
             comboPreferredVideoQuality.DataSource = Enum.GetValues(typeof(RequestedVideoQuality));
@@ -60,6 +62,9 @@ namespace HubDownloader
             comboPreferredBrowser.SelectedItem = SelectedSettings.PreferredBrowser;
             comboPreferredVideoQuality.SelectedItem = SelectedSettings.PreferredVideoQuality;
             comboFallbackVideoQuality.SelectedItem = SelectedSettings.FallbackVideoQuality;
+
+            cbEnableDebugLogging.Checked = SelectedSettings.EnableDebugLogging;
+            tbDebuggingLogFile.Text = SelectedSettings.DebuggingLogFile;
         }
 
         private void btnOk_Click(object sender, EventArgs e)
@@ -68,11 +73,21 @@ namespace HubDownloader
             SelectedSettings.EdgeInstalledLocation = tbEdgeInstallationLocation.Text;
             SelectedSettings.FirefoxInstalledLocation = tbFirefoxInstallationLocation.Text;
 
+            SelectedSettings.DiscreetLinkTitles = cbDiscreetLinkTitles.Checked;
+            SelectedSettings.AutoScanClipboard = cbAutoScanClipboard.Checked;
             SelectedSettings.OpenBrowserInPrivateMode = cbPrivateMode.Checked;
 
             SelectedSettings.PreferredBrowser = (BrowserSelection)comboPreferredBrowser.SelectedItem;
             SelectedSettings.PreferredVideoQuality = (RequestedVideoQuality)comboPreferredVideoQuality.SelectedItem;
             SelectedSettings.FallbackVideoQuality = (FallBackVideoQuality)comboFallbackVideoQuality.SelectedItem;
+
+            SelectedSettings.EnableDebugLogging = cbEnableDebugLogging.Checked;
+            SelectedSettings.DebuggingLogFile = tbDebuggingLogFile.Text;
+        }
+
+        private void linkSubmitBugReport_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            BrowserHelperMethods.LaunchPreferredBrowser("https://github.com/Encrypt4Jesus/HubDownloader/issues/new?template=bug_report.md", false);
         }
     }
 }
