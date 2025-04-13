@@ -1,0 +1,72 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<UseWindowsForms>true</UseWindowsForms>
+		<OutputType>WinExe</OutputType>
+
+		<Nullable>annotations</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Title>HubDownloader</Title>
+		<Product>HubDownloader</Product>
+		<AssemblyName>HubDownloader</AssemblyName>
+		<AssemblyTitle>HubDownloader</AssemblyTitle>
+		<Description>Desktop application that enables unlimited downloading of PornHub videos as MP4 files.</Description>
+		<Authors>Encrypt4Jesus</Authors>
+		<RepositoryUrl>https://github.com/Encrypt4Jesus/HubDownloader</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<MajorVersion Condition=" '$(MajorVersion)' == '' ">1</MajorVersion>
+		<MinorVersion Condition=" '$(MinorVersion)' == '' ">0</MinorVersion>
+		<PatchVersion Condition=" '$(PatchVersion)' == '' ">2</PatchVersion>
+
+		<VersionPrefix>$(MajorVersion).$(MinorVersion).$(PatchVersion)</VersionPrefix>
+		<VersionSuffix></VersionSuffix>
+		<ProduceReferenceAssembly>False</ProduceReferenceAssembly>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
+		<BaseOutputPath>..\..\Binaries</BaseOutputPath>
+		<OutputPath>..\..\Binaries\Release</OutputPath>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+	</PropertyGroup>
+
+	<ItemGroup>
+
+		<PackageReference Include="Costura.Fody" Version="6.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive compile</IncludeAssets>
+		</PackageReference>
+
+		<PackageReference Include="Fody" Version="6.8.2">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive; compile</IncludeAssets>
+		</PackageReference>
+
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="Selenium.Support" Version="4.31.0" />
+		<PackageReference Include="Selenium.WebDriver" Version="4.31.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="Dependencies\Newtonsoft.Json.dll">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Dependencies\WebDriver.dll">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Dependencies\WebDriver.Support.dll">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="selenium-manager.exe">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+</Project>
