@@ -127,12 +127,12 @@
             linkContextMenu.Items.AddRange(new ToolStripItem[] { toolStripMenuOpenLink, toolStripMenuCopyLink, renewLinkToolStripMenuItem, removeToolStripMenuItem });
             linkContextMenu.Name = "linkContextMenu";
             linkContextMenu.ShowImageMargin = false;
-            linkContextMenu.Size = new Size(186, 136);
+            linkContextMenu.Size = new Size(136, 108);
             // 
             // toolStripMenuOpenLink
             // 
             toolStripMenuOpenLink.Name = "toolStripMenuOpenLink";
-            toolStripMenuOpenLink.Size = new Size(185, 26);
+            toolStripMenuOpenLink.Size = new Size(135, 26);
             toolStripMenuOpenLink.Text = "&Open...";
             toolStripMenuOpenLink.ToolTipText = "Open link with configured browser";
             toolStripMenuOpenLink.Click += toolStripMenuOpenLink_Click;
@@ -140,7 +140,7 @@
             // toolStripMenuCopyLink
             // 
             toolStripMenuCopyLink.Name = "toolStripMenuCopyLink";
-            toolStripMenuCopyLink.Size = new Size(185, 26);
+            toolStripMenuCopyLink.Size = new Size(135, 26);
             toolStripMenuCopyLink.Text = "&Copy URL";
             toolStripMenuCopyLink.ToolTipText = "Copy link address to the clipboard";
             toolStripMenuCopyLink.Click += toolStripMenuCopyLink_Click;
@@ -148,7 +148,7 @@
             // renewLinkToolStripMenuItem
             // 
             renewLinkToolStripMenuItem.Name = "renewLinkToolStripMenuItem";
-            renewLinkToolStripMenuItem.Size = new Size(185, 26);
+            renewLinkToolStripMenuItem.Size = new Size(135, 26);
             renewLinkToolStripMenuItem.Text = "Re&new Link";
             renewLinkToolStripMenuItem.ToolTipText = "Grabs a new URL from the server. Use this if the link expires";
             renewLinkToolStripMenuItem.Click += renewLinkToolStripMenuItem_Click;
@@ -156,7 +156,7 @@
             // removeToolStripMenuItem
             // 
             removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-            removeToolStripMenuItem.Size = new Size(185, 26);
+            removeToolStripMenuItem.Size = new Size(135, 26);
             removeToolStripMenuItem.Text = "&Remove";
             removeToolStripMenuItem.ToolTipText = "Remove this link from the list control";
             removeToolStripMenuItem.Click += removeToolStripMenuItem_Click;
@@ -192,7 +192,7 @@
             richTextBox_Example.ReadOnly = true;
             richTextBox_Example.Size = new Size(584, 21);
             richTextBox_Example.TabIndex = 9;
-            richTextBox_Example.Text = "...hub.com/view_video.php?viewkey=THeViEwKey123";
+            richTextBox_Example.Text = "...hub.com/view_video.php?viewkey=TheViewKey123";
             // 
             // flowLayoutPanel1
             // 

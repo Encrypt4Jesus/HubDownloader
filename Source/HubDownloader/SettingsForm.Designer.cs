@@ -461,7 +461,7 @@
             btnCancel.DialogResult = DialogResult.Cancel;
             btnCancel.Font = new Font("Segoe UI", 9F);
             btnCancel.ForeColor = Color.FromArgb(192, 0, 0);
-            btnCancel.Location = new Point(52, 3);
+            btnCancel.Location = new Point(219, 3);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(150, 34);
             btnCancel.TabIndex = 15;
@@ -474,7 +474,7 @@
             btnOk.DialogResult = DialogResult.OK;
             btnOk.Font = new Font("Segoe UI", 9F);
             btnOk.ForeColor = Color.Green;
-            btnOk.Location = new Point(208, 3);
+            btnOk.Location = new Point(52, 3);
             btnOk.Name = "btnOk";
             btnOk.Size = new Size(161, 34);
             btnOk.TabIndex = 20;
@@ -660,8 +660,8 @@
             // flowLayoutPanelButtons
             // 
             flowLayoutPanelButtons.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            flowLayoutPanelButtons.Controls.Add(btnOk);
             flowLayoutPanelButtons.Controls.Add(btnCancel);
+            flowLayoutPanelButtons.Controls.Add(btnOk);
             flowLayoutPanelButtons.FlowDirection = FlowDirection.RightToLeft;
             flowLayoutPanelButtons.Location = new Point(499, 6);
             flowLayoutPanelButtons.Name = "flowLayoutPanelButtons";
