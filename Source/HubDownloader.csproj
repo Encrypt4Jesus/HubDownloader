@@ -31,8 +31,8 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
-		<BaseOutputPath>..\..\Binaries</BaseOutputPath>
-		<OutputPath>..\..\Binaries\Release</OutputPath>
+		<BaseOutputPath>..\Binaries</BaseOutputPath>
+		<OutputPath>..\Binaries\Release</OutputPath>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
 	</PropertyGroup>
